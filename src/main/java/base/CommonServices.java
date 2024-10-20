@@ -19,12 +19,6 @@ public class CommonServices extends BaseServices{
     public static Map<String,String> cookies;
     private static String accessToken;
 
-    @BeforeMethod
-    public void setup(){
-        requestSpecBuilder = new RequestSpecBuilder();
-        requestSpecBuilder.setBaseUri(CommonAPI.BASE_URI);
-    }
-
     public static String getAccessToken(){
         getCSRFToken();
         validateCredential();
@@ -53,7 +47,7 @@ public class CommonServices extends BaseServices{
         //Option 1
         Document document = Jsoup.parse(response.asString());
         csrfToken = document.getElementById("login__csrf_token").attr("value");
-        System.out.println("CSRF Token  : " + csrfToken);
+       // System.out.println("CSRF Token  : " + csrfToken);
         Assert.assertNotNull(csrfToken);
         Assert.assertEquals(response.statusCode(), 200);
     }

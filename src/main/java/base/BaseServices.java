@@ -6,33 +6,49 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
+import java.util.Map;
+
 public class BaseServices {
     RequestSpecBuilder requestSpecBuilder;
 
     public BaseServices(){
         requestSpecBuilder = new RequestSpecBuilder();
     }
+
     public void buildServices(){
         requestSpecBuilder.setBaseUri(CommonAPI.BASE_URI);
     }
 
     public void setContentTypeAsURLENC(){
+        setUp();
         requestSpecBuilder.setContentType(ContentType.URLENC);
     }
 
     public void setContentTypeAsApplicationJSON(){
+        setUp();
         requestSpecBuilder.setContentType(ContentType.JSON);
     }
     public void setToken(){
+        setUp();
         requestSpecBuilder.addHeader("Authorization", "Bearer " + CommonServices.getAccessToken());
     }
 
     public void setCookies(){
+        setUp();
         requestSpecBuilder.addCookies(CommonServices.cookies);
     }
 
+    public void setQueryParameters(Map<String , String > queryParameters){
+        setUp();
+        requestSpecBuilder.addQueryParams(queryParameters);
+    }
+
+    public void setBody(String payload){
+        setUp();
+        requestSpecBuilder.setBody(payload);
+    }
+
     public Response executeGetAPI(String endPoint){
-        buildServices();
         setToken();
         setCookies();
 
@@ -41,20 +57,36 @@ public class BaseServices {
                 .when()
                 .get(endPoint)
                 .then().extract().response();
+        tearDown();
         return response;
     }
 
     public Response executePostAPI(String endPoint){
-        buildServices();
-        return RestAssured.given()
+        setToken();
+        setCookies();
+
+        Response response = RestAssured.given()
                 .spec(requestSpecBuilder.build())
                 .when()
-                .get(endPoint)
+                .post(endPoint)
                 .then().extract().response();
+        tearDown();
+        return response;
+    }
+
+    private void setUp(){
+        if (requestSpecBuilder == null){
+            requestSpecBuilder = new RequestSpecBuilder();
+        }
+        requestSpecBuilder.setBaseUri(CommonAPI.BASE_URI);
+    }
+
+    private void tearDown(){
+        requestSpecBuilder = null;
     }
 
     public Response executePutAPI(String endPoint){
-        buildServices();
+
         return RestAssured.given()
                 .spec(requestSpecBuilder.build())
                 .when()
