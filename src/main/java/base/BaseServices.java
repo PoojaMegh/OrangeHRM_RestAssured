@@ -43,6 +43,11 @@ public class BaseServices {
         requestSpecBuilder.addQueryParams(queryParameters);
     }
 
+    public void setParameter(String parameter){
+        setUp();
+        requestSpecBuilder.addParam(parameter);
+    }
+
     public void setBody(String payload){
         setUp();
         requestSpecBuilder.setBody(payload);
@@ -74,6 +79,47 @@ public class BaseServices {
         return response;
     }
 
+
+    public Response executePutAPI(String endPoint){
+        setToken();
+        setCookies();
+
+        Response response = RestAssured.given()
+                .spec(requestSpecBuilder.build())
+                .when()
+                .put(endPoint)
+                .then().extract().response();
+        tearDown();
+        return response;
+    }
+
+    public Response executePatchAPI(String endPoint, String recordID){
+        setToken();
+        setCookies();
+
+        Response response = RestAssured.given()
+                .spec(requestSpecBuilder.build())
+                .when()
+                .patch(endPoint +"/"+ recordID)
+                .then().extract().response();
+        tearDown();
+        return response;
+    }
+
+    public Response executeDeleteAPI(String endPoint){
+        setToken();
+        setCookies();
+
+        Response response = RestAssured.given()
+                .spec(requestSpecBuilder.build())
+                .when()
+                .delete(endPoint)
+                .then().extract().response();
+        tearDown();
+        return response;
+    }
+
+
     private void setUp(){
         if (requestSpecBuilder == null){
             requestSpecBuilder = new RequestSpecBuilder();
@@ -83,14 +129,5 @@ public class BaseServices {
 
     private void tearDown(){
         requestSpecBuilder = null;
-    }
-
-    public Response executePutAPI(String endPoint){
-
-        return RestAssured.given()
-                .spec(requestSpecBuilder.build())
-                .when()
-                .get(endPoint)
-                .then().extract().response();
     }
 }
