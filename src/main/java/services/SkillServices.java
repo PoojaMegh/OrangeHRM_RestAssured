@@ -12,8 +12,10 @@ public class SkillServices extends CommonServices {
         return executePostAPI(SkillAPI.SKILL_API);
     }
 
-    public void updateSkill(String payload){
-
+    public Response updateSkill(String payload, String recordID){
+        setBody(payload);
+        setContentTypeAsApplicationJSON();
+        return executePatchAPI(SkillAPI.SKILL_API, recordID);
     }
 
     public Response getSkillList(){
@@ -21,7 +23,9 @@ public class SkillServices extends CommonServices {
         return executeGetAPI(SkillAPI.SKILL_API);
     }
 
-    public void deleteSkill(String skillID){
-
+    public Response deleteSkill(String payload){
+        setBody(payload);
+        setContentTypeAsApplicationJSON();
+        return executeDeleteAPI(SkillAPI.SKILL_API);
     }
 }
