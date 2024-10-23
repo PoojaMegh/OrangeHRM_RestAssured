@@ -1,6 +1,6 @@
 package constants;
 
-public class SkillAPI {
+public class SkillAPIEndPoint {
 
     public static final String SKILL_API = "/api/skills";
 }

@@ -1,6 +1,6 @@
 package base;
 
-import constants.CommonAPI;
+import constants.CommonAPIEndPoint;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
@@ -16,7 +16,7 @@ public class BaseServices {
     }
 
     public void buildServices(){
-        requestSpecBuilder.setBaseUri(CommonAPI.BASE_URI);
+        requestSpecBuilder.setBaseUri(CommonAPIEndPoint.BASE_URI);
     }
 
     public void setContentTypeAsURLENC(){
@@ -124,7 +124,7 @@ public class BaseServices {
         if (requestSpecBuilder == null){
             requestSpecBuilder = new RequestSpecBuilder();
         }
-        requestSpecBuilder.setBaseUri(CommonAPI.BASE_URI);
+        requestSpecBuilder.setBaseUri(CommonAPIEndPoint.BASE_URI);
     }
 
     private void tearDown(){
