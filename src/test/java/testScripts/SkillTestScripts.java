@@ -1,5 +1,6 @@
 package testScripts;
 
+import entities.request.skillPayload.CreateSkillPayload;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -15,6 +16,7 @@ public class SkillTestScripts {
     @Test
     public void skillCURDOperations(){
         //Create or Post Operation
+        CreateSkillPayload createSkillPayload = CreateSkillPayload.builder().name(TestData.getSkillName()).description(TestData.getSkillDescription()).build();
         String payload = "{\n" +
                 "    \"name\": \""+ TestData.getSkillName() +"\",\n" +
                 "    \"description\": \""+TestData.getSkillDescription()+"\"\n" +
@@ -35,7 +37,7 @@ public class SkillTestScripts {
         Assert.assertEquals(getSkillResponse.statusCode(), 200);
         System.out.println("New Skill successfully retrieved !");
 
-        //Update or Put Operation
+        //Update or Put/Patch Operation
         Response updateSkillResponse = skillServices.updateSkill(payload, skillID);
         System.out.println(updateSkillResponse.asPrettyString());
         Assert.assertEquals(updateSkillResponse.statusCode(), 200);

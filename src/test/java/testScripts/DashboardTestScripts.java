@@ -1,14 +1,10 @@
 package testScripts;
 
-import constants.DashboardAPI;
 import entities.response.employeeList.EmployeeDataRoot;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 import services.DashboardServices;
 import services.EmployeeListServices;
-
-import java.util.LinkedHashMap;
-import java.util.List;
 
 public class DashboardTestScripts {
 

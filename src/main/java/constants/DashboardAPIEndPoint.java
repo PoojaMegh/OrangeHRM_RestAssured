@@ -1,6 +1,6 @@
 package constants;
 
-public class DashboardAPI {
+public class DashboardAPIEndPoint {
 
     private static String COMMONPATH_DASHBOARD = "/api";
 

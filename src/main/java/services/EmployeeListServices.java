@@ -1,7 +1,7 @@
 package services;
 
 import base.CommonServices;
-import constants.EmployeeAPI;
+import constants.EmployeeAPIEndPoint;
 import io.restassured.response.Response;
 
 import java.util.HashMap;
@@ -16,6 +16,6 @@ public class EmployeeListServices extends CommonServices {
         queryParam.put("page[limit]","200");
 
         setQueryParameters(queryParam);
-        return executeGetAPI(EmployeeAPI.GET_EMPLOYEE_LIST);
+        return executeGetAPI(EmployeeAPIEndPoint.GET_EMPLOYEE_LIST);
     }
 }
