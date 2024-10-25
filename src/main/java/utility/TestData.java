@@ -13,4 +13,9 @@ public class TestData {
         Faker faker = new Faker();
         return faker.book().genre();
     }
+
+    public static String getEducationName(){
+        Faker faker = new Faker();
+        return faker.educator().course();
+    }
 }

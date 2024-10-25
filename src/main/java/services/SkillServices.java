@@ -6,7 +6,7 @@ import io.restassured.response.Response;
 
 public class SkillServices extends CommonServices {
 
-    public Response createSkill(String payload){
+    public Response createSkill(Object payload){
         setBody(payload);
         setContentTypeAsApplicationJSON();
         return executePostAPI(SkillAPIEndPoint.SKILL_API);
@@ -23,7 +23,7 @@ public class SkillServices extends CommonServices {
         return executeGetAPI(SkillAPIEndPoint.SKILL_API);
     }
 
-    public Response deleteSkill(String payload){
+    public Response deleteSkill(Object payload){
         setBody(payload);
         setContentTypeAsApplicationJSON();
         return executeDeleteAPI(SkillAPIEndPoint.SKILL_API);

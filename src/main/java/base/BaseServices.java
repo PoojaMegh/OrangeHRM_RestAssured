@@ -48,7 +48,7 @@ public class BaseServices {
         requestSpecBuilder.addParam(parameter);
     }
 
-    public void setBody(String payload){
+    public void setBody(Object payload){
         setUp();
         requestSpecBuilder.setBody(payload);
     }
